@@ -1,0 +1,33 @@
+import json
+import boto3
+import time
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('ChatbotMessages')
+
+def lambda_handler(event, context):
+    # Get the incoming message from the query string
+    message = event['queryStringParameters']['message']
+    
+    # Store message in DynamoDB with a timestamp
+    message_id = str(time.time())  # Unique ID based on timestamp
+    timestamp = int(time.time())
+    
+    # Save the message to DynamoDB
+    table.put_item(
+        Item={
+            'messageId': message_id,
+            'timestamp': timestamp,
+            'message': message,
+            'response': "Hi! How can I assist you?"
+        }
+    )
+    
+    # Return the response
+    return {
+        'statusCode': 200,
+        'body': json.dumps({
+            'reply': 'Hi! How can I assist you?',
+            'message': message
+        })
+    }
