@@ -1,0 +1,61 @@
+import json
+import boto3
+import time
+import logging
+
+# Set up logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('ChatbotMessages')
+
+def lambda_handler(event, context):
+    logger.info("Lambda function started.")
+    try:
+        # Log the incoming event
+        logger.info(f"Received event: {json.dumps(event)}")
+        
+        # Get the incoming message from the query string
+        if 'queryStringParameters' not in event or 'message' not in event['queryStringParameters']:
+            logger.error("Message not found in the event.")
+            return {
+                'statusCode': 400,
+                'body': json.dumps({'error': 'Message not provided'})
+            }
+        
+        message = event['queryStringParameters']['message']
+        logger.info(f"Received message: {message}")
+        
+        # Store message in DynamoDB with a timestamp
+        message_id = str(time.time())  # Unique ID based on timestamp
+        timestamp = int(time.time())
+        
+        # Save the message to DynamoDB
+        logger.info(f"Storing message with messageId: {message_id} and timestamp: {timestamp}")
+        table.put_item(
+            Item={
+                'messageId': message_id,
+                'timestamp': timestamp,
+                'message': message,
+                'response': "Hi! How can I assist you?"
+            }
+        )
+        
+        logger.info(f"Message successfully stored in DynamoDB: {message_id}")
+        
+        # Return the response
+        return {
+            'statusCode': 200,
+            'body': json.dumps({
+                'reply': 'Hi! How can I assist you?',
+                'message': message
+            })
+        }
+        
+    except Exception as e:
+        logger.error(f"Error occurred: {str(e)}")
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }
