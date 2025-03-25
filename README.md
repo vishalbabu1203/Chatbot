@@ -2,9 +2,9 @@
 User interaction with chatbot static message
 We'll set up a serverless chatbot system on AWS Free Tier step by step. I'll guide you through everything, including architecture, AWS services, deployment, and testing.
 
-<h2> 🔹 What We’ll Build</h2>
+<h3> 🔹 What We’ll Build</h3>
 
-<h2>🚀 Technologies Used</h2>
+<h3>🚀 Technologies Used</h3>
     <ul> A basic chatbot using:      
         <li>✅ AWS Lambda – Serverless function for chatbot logic</li>
         <li>✅ Amazon API Gateway – Handles user requests</li>
@@ -18,7 +18,7 @@ We'll set up a serverless chatbot system on AWS Free Tier step by step. I'll gui
  
 
 
-<h2>🔹 Step-by-Step Guide</h2>
+<h3>🔹 Step-by-Step Guide</h3>
 I’ll provide detailed steps along with sample data so you can follow along easily. Here’s the plan:
 
 1️⃣ Set up AWS Free Tier – Ensure your account is ready.
@@ -30,7 +30,7 @@ I’ll provide detailed steps along with sample data so you can follow along eas
 7️⃣ Test the Chatbot – Verify end-to-end functionality.
 8️⃣ Deploy & Scale – Automate using Infrastructure as Code.
 
-<h1>🔹 Step 1: Create an AWS Lambda Function (Chatbot Logic)</h1>
+<h3>🔹 Step 1: Create an AWS Lambda Function (Chatbot Logic)</h3>
 ✅ What is AWS Lambda?
 AWS Lambda is a serverless compute service that runs your chatbot’s code only when needed, so you don’t need to manage any servers.
 
@@ -39,7 +39,7 @@ AWS Lambda is a serverless compute service that runs your chatbot’s code only 
 2️⃣ Process the message using a simple chatbot logic.
 3️⃣ Return a response (e.g., “Hi! How can I help you?”).
 
-<h1>🔹 Step-by-Step Guide</h1>
+<h3>🔹 Step-by-Step Guide</h3>
 1️⃣ Open AWS Lambda Console
 Go to AWS Lambda Console
 Click “Create function”
@@ -49,23 +49,23 @@ Runtime: Choose Python 3.9 (or latest available version)
 Permissions: Choose "Create a new role with basic Lambda permissions"
 Click “Create function”
 
-<h1>2️⃣ Write the Lambda Function Code</h1>
+<h3>2️⃣ Write the Lambda Function Code</h3>
 Once your function is created:
 
 Scroll down to the Code section
 Delete any default code and copy-paste this Python code:
 
-<h1>3️⃣ Deploy the Lambda Function</h1>
+<h3>3️⃣ Deploy the Lambda Function</h3>
 Click “Deploy”
 Your Lambda function is now ready!
 
 Python Code
 
-<h1>🔹 Step 2: Set Up API Gateway (User Interaction Endpoint)</h1>
+<h3>🔹 Step 2: Set Up API Gateway (User Interaction Endpoint)</h3>
 ✅ What is API Gateway?
 Amazon API Gateway is a fully managed service that allows users to send requests to your Lambda function via an HTTP URL.
 
-<h1>✅ Why Do We Need It?</h1>
+<h3>✅ Why Do We Need It?</h3>
 Users can send messages to the chatbot using a simple web request (URL).
 API Gateway will trigger the Lambda function, process the message, and return a response.
 This allows your chatbot to be accessed from websites, mobile apps, or third-party applications.
